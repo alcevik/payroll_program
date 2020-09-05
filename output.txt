@@ -1,0 +1,140 @@
+ALKIM CEVIK - CISC 3110 SPRING 2014 ( PROF. LOWENTHAL)
+HOMEWORK #3
+
+		MISER CORPORATION Payroll
+
+The name is Duck, Donald
+The hours worked is 45.00 hours
+The rate of pay is $3.50 per hour
+The age is 60
+The base pay is $166.25
+The tax paid is $83.12
+The net pay is $83.12
+
+The name is Mouse, Mickey
+The hours worked is 35.00 hours
+The rate of pay is $6.50 per hour
+The age is 55
+The base pay is $227.50
+The tax paid is $113.75
+The net pay is $113.75
+
+The name is Brown, Charlie
+The hours worked is 35.00 hours
+The rate of pay is $3.00 per hour
+The age is 20
+The base pay is $105.00
+The tax paid is $10.50
+The net pay is $94.50
+
+The name is Oyle, Olive
+The hours worked is 40.00 hours
+The rate of pay is $4.50 per hour
+The age is 60
+The base pay is $180.00
+The tax paid is $90.00
+The net pay is $90.00
+
+The name is Man, He
+The hours worked is 45.00 hours
+The rate of pay is $7.50 per hour
+The age is 20
+The base pay is $356.25
+The tax paid is $35.62
+The net pay is $320.62
+
+The name is Ra, She
+The hours worked is 40.00 hours
+The rate of pay is $3.50 per hour
+The age is 20
+The base pay is $140.00
+The tax paid is $14.00
+The net pay is $126.00
+
+The name is Jetson, George
+The hours worked is 45.00 hours
+The rate of pay is $3.50 per hour
+The age is 55
+The base pay is $166.25
+The tax paid is $83.12
+The net pay is $83.12
+
+The name is Starr, Brenda
+The hours worked is 35.00 hours
+The rate of pay is $8.40 per hour
+The age is 60
+The base pay is $294.00
+The tax paid is $147.00
+The net pay is $147.00
+
+The name is Woman, Wonder
+The hours worked is 40.00 hours
+The rate of pay is $3.50 per hour
+The age is 55
+The base pay is $140.00
+The tax paid is $70.00
+The net pay is $70.00
+
+The name is Jets, Green
+The hours worked is 45.00 hours
+The rate of pay is $13.50 per hour
+The age is 55
+The base pay is $641.25
+The tax paid is $320.62
+The net pay is $320.62
+
+The name is Barr, Jimmy
+The hours worked is 35.00 hours
+The rate of pay is $9.00 per hour
+The age is 60
+The base pay is $315.00
+The tax paid is $157.50
+The net pay is $157.50
+
+The name is Evans, Robert
+The hours worked is 40.00 hours
+The rate of pay is $8.00 per hour
+The age is 55
+The base pay is $320.00
+The tax paid is $160.00
+The net pay is $160.00
+
+Oldest employee name: Duck, Donald, age: 60
+Youngest employee name: Brown, Charlie, age: 20
+Highest tax paid employee name: Jets, Green, tax paid: $320.62
+
+Alphabetically sorted list of all the company's employees:
+
+Employee Name  Hours Worked    Pay Rate  Age    Tax Paid     Net Pay
+-------------  ------------    --------  ---    --------     -------
+Barr, Jimmy                      35.00        9.00   60      157.50      157.50
+Brown, Charlie                      35.00        3.00   20       10.50       94.50
+Duck, Donald                      45.00        3.50   60       83.12       83.12
+Evans, Robert                      40.00        8.00   55      160.00      160.00
+Jets, Green                      45.00       13.50   55      320.62      320.62
+Jetson, George                      45.00        3.50   55       83.12       83.12
+Man, He                      45.00        7.50   20       35.62      320.62
+Mouse, Mickey                      35.00        6.50   55      113.75      113.75
+Oyle, Olive                      40.00        4.50   60       90.00       90.00
+Ra, She                      40.00        3.50   20       14.00      126.00
+Starr, Brenda                      35.00        8.40   60      147.00      147.00
+Woman, Wonder                      40.00        3.50   55       70.00       70.00
+
+List of the employees sorted by net pay:
+
+Employee Name  Hours Worked    Pay Rate  Age    Tax Paid     Net Pay
+-------------  ------------    --------  ---    --------     -------
+Jets, Green                      45.00       13.50   55      320.62      320.62
+Man, He                      45.00        7.50   20       35.62      320.62
+Evans, Robert                      40.00        8.00   55      160.00      160.00
+Barr, Jimmy                      35.00        9.00   60      157.50      157.50
+Starr, Brenda                      35.00        8.40   60      147.00      147.00
+Ra, She                      40.00        3.50   20       14.00      126.00
+Mouse, Mickey                      35.00        6.50   55      113.75      113.75
+Brown, Charlie                      35.00        3.00   20       10.50       94.50
+Oyle, Olive                      40.00        4.50   60       90.00       90.00
+Jetson, George                      45.00        3.50   55       83.12       83.12
+Duck, Donald                      45.00        3.50   60       83.12       83.12
+Woman, Wonder                      40.00        3.50   55       70.00       70.00
+
+Payroll program is complete.

@@ -1,0 +1,348 @@
+/* ALKIM CEVIK - CISC 3110 SPRING 2014 ( PROF. LOWENTHAL)
+ * HOMEWORK #3
+ * Program reads employee data from external file and prints 
+ * the data, calculates netpays, taxes and sorts the employees
+ * alphabetically at the end 
+ */
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <string>
+using namespace std;
+
+// constants
+const int MAX_EMPLOYEES = 100; // maximum number of employees
+
+// function prototypes
+int findOldest(int ages[], int count);
+int findYoungest(int ages[], int count);
+int findHighestTax(double taxes[], int count);
+void sortByName(string names[], double hours[], double rates[], int ages[],
+				double taxes[], double netPay[], int count);
+void sortByNetPay(string names[], double hours[], double rates[], int ages[],
+				  double taxes[], double netPay[], int count);
+void print(string names[], double hours[], double rates[], int ages[],
+		   double taxes[], double netPay[], int count);
+
+// main function
+int main()
+{
+	// input file stream
+	ifstream infile;
+	// employee's names
+	string names[MAX_EMPLOYEES];
+	// hours worked array
+	double hours[MAX_EMPLOYEES];
+	// rate of pay
+	double rates[MAX_EMPLOYEES];
+	// ages
+	int ages[MAX_EMPLOYEES];
+	// taxes
+	double taxes[MAX_EMPLOYEES];
+	// net pay
+	double netPay[MAX_EMPLOYEES];
+	// number of employees
+	int count = 0;
+	// employee's name
+	string name;
+	// hours worked
+	double hoursWorked;
+	// rate of pay
+	double rate;
+	// age
+	int age;
+	// base pay
+	double basePay;
+	// subscript
+	int index;
+    
+	// print the heading
+	cout << "\t\tMISER CORPORATION Payroll" << endl;
+    
+	// open data file
+	infile.open("/Users/sepultraslan/Desktop/homework_3/input.txt");
+    
+	// if could not open file
+	if (!infile.is_open())
+	{
+		// display error
+		cout << endl;
+		cout << "Error: could not open 'input.txt' file" << endl;
+        
+		// terminate program
+		return 1;
+	}
+    
+	// set floating point output to two decimal points in fixed format
+	cout << fixed << showpoint << setprecision(2);
+    
+	// while end of file is not reached
+	// read employee's name, hours worked, rate of pay and age
+	while (!infile.eof() && getline(infile, name) &&
+           infile >> hoursWorked >> rate >> age)
+	{
+		// if maximum reached
+		if (count == MAX_EMPLOYEES)
+		{
+			// display error
+			cout << endl;
+			cout << "Error: maximum number of employees reached" << endl;
+			// close file
+			infile.close();
+			// terminate program
+			return 1;
+		}
+        
+		// print the data
+		cout << endl;
+		cout << "The name is " << name << endl;
+		cout << "The hours worked is " << hoursWorked << " hours" << endl;
+		cout << "The rate of pay is $" << rate << " per hour" << endl;
+		cout << "The age is " << age << endl;
+        
+		// compute the base pay
+		if (hoursWorked <= 40)
+			basePay = hoursWorked * rate;
+		else
+			basePay = 40 * rate + (hoursWorked - 40) * 1.5 * rate;
+        
+		// print the base pay
+		cout << "The base pay is $" << basePay << endl;
+        
+		// compute the tax paid by the employee
+		if (age >= 55)
+			taxes[count] = 0.5 * basePay;
+		else
+			taxes[count] = 0.1 * basePay;
+        
+		// print the tax
+		cout << "The tax paid is $" << taxes[count] << endl;
+        
+		// compute the net pay
+		netPay[count] = basePay - taxes[count];
+        
+		// print the net pay
+		cout << "The net pay is $" << netPay[count] << endl;
+        
+		// ignore end of line
+		infile.ignore(80, '\n');
+        
+		// store data into array
+		names[count] = name;
+		hours[count] = hoursWorked;
+		rates[count] = rate;
+		ages[count] = age;
+        
+		// increment number of employees
+		count++;
+	}
+    
+	// close file
+	infile.close();
+    
+	// print new line
+	cout << endl;
+    
+	// if no data
+	if (count == 0)
+	{
+		cout << "No employees data" << endl;
+	}
+	else
+	{
+		// print the name and age of the oldest employee
+		index = findOldest(ages, count);
+		cout << "Oldest employee name: " << names[index] << ", age: " << ages[index] << endl;
+        
+		// print the name and age of the youngest employee
+		index = findYoungest(ages, count);
+		cout << "Youngest employee name: " << names[index] << ", age: " << ages[index] << endl;
+        
+		// print the name and taxes of the employee who paid the most in taxes
+		index = findHighestTax(taxes, count);
+		cout << "Highest tax paid employee name: " << names[index] << ", tax paid: $" << taxes[index] << endl;
+        
+		// print an alphabetically sorted list of all the company's employees
+		sortByName(names, hours, rates, ages, taxes, netPay, count);
+		cout << endl;
+		cout << "Alphabetically sorted list of all the company's employees:" << endl;
+		print(names, hours, rates, ages, taxes, netPay, count);
+        
+		// print a list of the employees sorted by net pay
+		sortByNetPay(names, hours, rates, ages, taxes, netPay, count);
+		cout << endl;
+		cout << "List of the employees sorted by net pay:" << endl;
+		print(names, hours, rates, ages, taxes, netPay, count);
+	}
+    
+	// print a message saying that the payroll program is complete
+	cout << endl;
+	cout << "Payroll program is complete." << endl;
+    
+	return 0;
+}
+
+// Returns the oldest employee subscript
+int findOldest(int ages[], int count)
+{
+	int oldest = 0;
+    
+	for (int i = 1; i < count; i++)
+	{
+		if (ages[i] > ages[oldest])
+		{
+			oldest = i;
+		}
+	}
+    
+	return oldest;
+}
+
+// Returns the youngest employee subscript
+int findYoungest(int ages[], int count)
+{
+	int youngest = 0;
+    
+	for (int i = 1; i < count; i++)
+	{
+		if (ages[i] < ages[youngest])
+		{
+			youngest = i;
+		}
+	}
+    
+	return youngest;
+}
+
+// Returns the subscript of highest taxes
+int findHighestTax(double taxes[], int count)
+{
+	int index = 0;
+    
+	for (int i = 1; i < count; i++)
+	{
+		if (taxes[i] > taxes[index])
+		{
+			index = i;
+		}
+	}
+    
+	return index;
+}
+
+// sort data by employee name
+void sortByName(string names[], double hours[], double rates[], int ages[],
+				double taxes[], double netPay[], int count)
+{
+	for (int i = 0; i < count-1; i++)
+	{
+		int j = i;
+        
+		for (int k = i+1; k < count; k++)
+		{
+			if (names[k] < names[j])
+			{
+				j = k;
+			}
+		}
+        
+		if (i != j)
+		{
+			string tempS;
+			double tempD;
+			int tempI;
+            
+			tempS = names[i];
+			names[i] = names[j];
+			names[j] = tempS;
+            
+			tempD = hours[i];
+			hours[i] = hours[j];
+			hours[j] = tempD;
+            
+			tempD = rates[i];
+			rates[i] = rates[j];
+			rates[j] = tempD;
+            
+			tempI = ages[i];
+			ages[i] = ages[j];
+			ages[j] = tempI;
+            
+			tempD = taxes[i];
+			taxes[i] = taxes[j];
+			taxes[j] = tempD;
+            
+			tempD = netPay[i];
+			netPay[i] = netPay[j];
+			netPay[j] = tempD;
+		}
+	}
+}
+
+// sort data by net pay
+void sortByNetPay(string names[], double hours[], double rates[], int ages[],
+				  double taxes[], double netPay[], int count)
+{
+	for (int i = 0; i < count-1; i++)
+	{
+		int j = i;
+        
+		for (int k = i+1; k < count; k++)
+		{
+			if (netPay[k] > netPay[j])
+			{
+				j = k;
+			}
+		}
+        
+		if (i != j)
+		{
+			string tempS;
+			double tempD;
+			int tempI;
+            
+			tempS = names[i];
+			names[i] = names[j];
+			names[j] = tempS;
+            
+			tempD = hours[i];
+			hours[i] = hours[j];
+			hours[j] = tempD;
+            
+			tempD = rates[i];
+			rates[i] = rates[j];
+			rates[j] = tempD;
+            
+			tempI = ages[i];
+			ages[i] = ages[j];
+			ages[j] = tempI;
+            
+			tempD = taxes[i];
+			taxes[i] = taxes[j];
+			taxes[j] = tempD;
+            
+			tempD = netPay[i];
+			netPay[i] = netPay[j];
+			netPay[j] = tempD;
+		}
+	}
+}
+
+// print data
+void print(string names[], double hours[], double rates[], int ages[],
+		   double taxes[], double netPay[], int count)
+{
+	cout << endl;
+	cout << "Employee Name  Hours Worked    Pay Rate  Age    Tax Paid     Net Pay" << endl;
+	cout << "-------------  ------------    --------  ---    --------     -------" << endl;
+    
+	for (int i = 0; i < count; i++)
+	{
+		cout << left << setw(12) << names[i];
+		cout << right << setw(27) << hours[i];
+		cout << setw(12) << rates[i]; 
+		cout << setw(5) << ages[i];
+		cout << setw(12) << taxes[i];
+		cout << setw(12) << netPay[i] << endl;
+	}
+}
